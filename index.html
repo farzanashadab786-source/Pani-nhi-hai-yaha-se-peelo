@@ -1,28 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PANI NHI HAI YAHA SE PILO</title>
     <style>
-        /* Yahan saara Makeup (CSS) hota hai */
-        body { background: pink; }
-        #glass { width: 100px; height: 200px; border: 2px solid white; }
+        body { 
+            margin: 0; background: #ffdef2; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            height: 100vh; font-family: sans-serif; 
+        }
+        h1 { color: #ff1493; margin-bottom: 20px; }
+        
+        /* Glass ko beech mein aur bada karne ka fix */
+        #glass { 
+            width: 150px; height: 250px; 
+            border: 6px solid white; border-top: none; 
+            border-radius: 0 0 50px 50px; 
+            position: relative; background: rgba(255,255,255,0.4); 
+            overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        #liquid { 
+            position: absolute; bottom: 0; width: 100%; 
+            height: 0%; background: #ff1493; 
+            transition: height 0.3s ease; 
+        }
+
+        button { 
+            margin-top: 30px; padding: 15px 40px; 
+            font-size: 20px; background: #ff1493; 
+            color: white; border: none; border-radius: 50px; 
+            box-shadow: 0 5px #c71585; cursor: pointer;
+        }
+        button:active { transform: translateY(4px); box-shadow: none; }
     </style>
 </head>
 <body>
 
-    <h1>Haniya's Smoothie Lab</h1>
+    <h1>Haniya's Smoothie 🍓</h1>
+    
     <div id="glass">
         <div id="liquid"></div>
     </div>
-    <button onclick="peelo()">DRINK</button>
+
+    <button onclick="fill()">FILL GLASS 🥤</button>
 
     <script>
-        // Ye hai tera JavaScript (The Brain)
-        // Ise humne HTML file ke andar hi mix kar diya hai
-        function peelo() {
-            alert("Haniya ne smoothie pee li! 🥤");
-            // Yahan tera tilt aur gravity wala logic aata hai
+        let vol = 0;
+        const liq = document.getElementById('liquid');
+
+        function fill() {
+            if(vol < 100) {
+                vol += 25;
+                liq.style.height = vol + "%";
+            }
         }
+
+        window.addEventListener('deviceorientation', (e) => {
+            // Agar phone tilt karein aur smoothie ho
+            if (Math.abs(e.gamma) > 40 && vol > 0) {
+                vol -= 1;
+                liq.style.height = vol + "%";
+                if(vol <= 0) {
+                    alert("Haniya ne smoothie pee li! 🥤✨");
+                }
+            }
+        });
     </script>
-    </body>
+</body>
 </html>
