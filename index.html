@@ -1,95 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Haniya's Smoothie Lab 🍓</title>
+    <title>PANI NHI HAI YAHA SE PILO</title>
     <style>
-        body { margin: 0; background: #ffe4e1; font-family: 'Comic Sans MS', cursive; overflow: hidden; text-align: center; }
-        .header { background: #ff69b4; padding: 15px; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        
-        /* The Glass */
-        #glass-container { position: relative; width: 150px; height: 250px; margin: 50px auto; border: 5px solid #fff; border-top: none; border-radius: 0 0 40px 40px; background: rgba(255,255,255,0.3); overflow: hidden; transform-origin: bottom center; transition: transform 0.1s; }
-        #liquid { position: absolute; bottom: 0; width: 100%; height: 0%; transition: height 0.5s, background 0.5s; border-radius: 0 0 35px 35px; }
-
-        /* Buttons */
-        .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; max-width: 400px; margin: 0 auto; }
-        .btn { padding: 15px; border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 14px; cursor: pointer; transition: transform 0.1s; box-shadow: 0 5px #999; }
-        .btn:active { transform: translateY(4px); box-shadow: 0 2px #666; }
-        
-        .red { background: #ff4d4d; }
-        .blue { background: #4da6ff; }
-        .yellow { background: #ffd633; }
-        .green { background: #4dff4d; }
-        .ice { background: #a6f7ff; color: #333; }
-        .milk { background: #fff; color: #333; }
-
-        #msg { margin-top: 10px; color: #ff1493; font-weight: bold; }
+        /* Yahan saara Makeup (CSS) hota hai */
+        body { background: pink; }
+        #glass { width: 100px; height: 200px; border: 2px solid white; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h2>🥤 SMOOTHIE MAKER 🍓</h2></div>
-    <p id="msg">Tap buttons to fill the glass!</p>
-
-    <div id="glass-container">
+    <h1>Haniya's Smoothie Lab</h1>
+    <div id="glass">
         <div id="liquid"></div>
     </div>
-
-    <div class="controls">
-        <button class="btn red" onclick="addIngredient('#ff4d4d', 'Strawberry')">STRAWBERRY</button>
-        <button class="btn blue" onclick="addIngredient('#4da6ff', 'Blueberry')">BLUEBERRY</button>
-        <button class="btn yellow" onclick="addIngredient('#ffd633', 'Mango')">MANGO</button>
-        <button class="btn green" onclick="addIngredient('#4dff4d', 'Kiwi')">KIWI</button>
-        <button class="btn ice" onclick="addIngredient('#e0ffff', 'Ice')">ICE</button>
-        <button class="btn milk" onclick="addIngredient('#ffffff', 'Milk')">MILK</button>
-    </div>
-
-    <p style="font-size: 12px; color: #666;">Tip: Tilt your phone to "drink" or pour!</p>
+    <button onclick="peelo()">DRINK</button>
 
     <script>
-        let fillLevel = 0;
-        const liquid = document.getElementById('liquid');
-        const glass = document.getElementById('glass-container');
-
-        function addIngredient(color, name) {
-            if(fillLevel < 100) {
-                fillLevel += 15;
-                liquid.style.height = fillLevel + "%";
-                liquid.style.backgroundColor = color;
-                document.getElementById('msg').innerText = "Added: " + name + "! ✨";
-                
-                // Shake effect on add
-                glass.style.transform = "scale(1.05)";
-                setTimeout(() => glass.style.transform = "scale(1)", 100);
-            } else {
-                document.getElementById('msg').innerText = "Glass is Full! Drink up! 😋";
-            }
+        // Ye hai tera JavaScript (The Brain)
+        // Ise humne HTML file ke andar hi mix kar diya hai
+        function peelo() {
+            alert("Haniya ne smoothie pee li! 🥤");
+            // Yahan tera tilt aur gravity wala logic aata hai
         }
-
-        // TILT LOGIC (Gyroscrope)
-        window.addEventListener('deviceorientation', (event) => {
-            let tilt = event.gamma; // Left to Right tilt
-            if (tilt > 45) tilt = 45;
-            if (tilt < -45) tilt = -45;
-
-            // Rotate glass based on phone tilt
-            glass.style.transform = `rotate(${tilt}deg)`;
-            
-            // If tilted too much, liquid "pours" (empty glass)
-            if(Math.abs(tilt) > 35 && fillLevel > 0) {
-                fillLevel -= 0.5;
-                liquid.style.height = fillLevel + "%";
-                document.getElementById('msg').innerText = "Yum! Drinking... 😋";
-            }
-        });
-
-        // For desktop testing (mouse move simulates tilt)
-        window.addEventListener('mousemove', (e) => {
-            if(window.innerWidth > 600) {
-                let mouseTilt = (e.clientX / window.innerWidth - 0.5) * 60;
-                glass.style.transform = `rotate(${mouseTilt}deg)`;
-            }
-        });
     </script>
-</body>
+    </body>
 </html>
